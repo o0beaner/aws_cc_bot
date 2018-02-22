@@ -1,0 +1,35 @@
+{
+  "name": "aws_cc_bot",
+  "version": "0.0.1",
+  "description": "My own Discord bot",
+  "main": "bot.js",
+  "engines": {
+    "node": "9.5.0",
+    "npm": "5.6.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.201.0",
+    "discord.io": "github:woor/discord.io#gateway_v6",
+    "kms-json": "^1.1.1",
+    "lodash": "^4.17.5",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o0beaner/aws_cc_bot.git"
+  },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/o0beaner/aws_cc_bot/issues"
+  },
+  "homepage": "https://github.com/o0beaner/aws_cc_bot#readme"
+}
