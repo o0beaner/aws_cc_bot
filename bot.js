@@ -101,7 +101,7 @@ function decryptEnvVars() {
 function botInit(varObj) {
 
     const bot = new Discord.Client({
-        token: varObj.dev_authtoken,
+        token: varObj.prod_authtoken,
         autorun: true
     });
 
