@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+#files:
+#  - source: Config/config.txt
+#    destination: /webapps/Config
+#  - source: source
+#    destination: /webapps/myApp
+hooks:
+  BeforeInstall:
+    - location: scripts/stop.sh
+      timeout: 180
+  AfterInstall:
+    - location: scripts/npm_update.sh
+      timeout: 180
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 3600

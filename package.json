@@ -10,8 +10,10 @@
   "dependencies": {
     "aws-sdk": "^2.201.0",
     "discord.io": "github:woor/discord.io#gateway_v6",
+    "forever": "^0.15.3",
     "kms-json": "^1.1.1",
     "lodash": "^4.17.5",
+    "tty-table": "^2.5.5",
     "winston": "^2.4.0"
   },
   "devDependencies": {},
