@@ -1,0 +1,72 @@
+{
+  "Instances": {
+    "AdditionalMasterSecurityGroups": ["sg-3ed30a59"],
+    "AdditionalSlaveSecurityGroups": ["sg-3ed30a59"],
+    "Ec2KeyName": "tylebean",
+    "Ec2SubnetId": "subnet-b674d49b",
+    "EmrManagedMasterSecurityGroup": "sg-7e523e04",
+    "EmrManagedSlaveSecurityGroup": "sg-7f523e05",
+    "InstanceGroups": [{
+      "InstanceCount": 1,
+      "InstanceRole": "MASTER",
+      "InstanceType": "c4.2xlarge",
+      "EbsConfiguration": {
+        "EbsBlockDeviceConfigs": [{
+          "VolumeSpecification": {
+            "SizeInGB": 20,
+            "VolumeType": "gp2"
+          },
+          "VolumesPerInstance": 1
+        }],
+        "EbsOptimized": true
+      },
+      "Market": "ON_DEMAND",
+      "Name": "Master"
+    }, {
+      "InstanceCount": 4,
+      "InstanceRole": "CORE",
+      "InstanceType": "c4.2xlarge",
+      "EbsConfiguration": {
+        "EbsBlockDeviceConfigs": [{
+          "VolumeSpecification": {
+            "SizeInGB": 20,
+            "VolumeType": "gp2"
+          },
+          "VolumesPerInstance": 1
+        }],
+        "EbsOptimized": true
+      },
+      "Market": "ON_DEMAND",
+      "Name": "Core"
+    }],
+    "KeepJobFlowAliveWhenNoSteps": true,
+    "TerminationProtected": true
+  },
+  "Name": "ba_test, no jupyter",
+  "Applications": [{
+    "Name": "Hadoop"
+  }, {
+    "Name": "Spark"
+  }, {
+    "Name": "Hive"
+  },{
+    "Name": "Tez"
+  }, {
+    "Name": "Ganglia"
+  }],
+  "AutoScalingRole": "EMR_AutoScaling_DefaultRole",
+  "BootstrapActions": [{
+    "Name": "EMR Base",
+    "ScriptBootstrapAction": {
+      "Path": "s3://ty-emr/XRR/bootstrap/ba_test.sh",
+      "Args": []
+    }
+  }],
+  "EbsRootVolumeSize": 20,
+  "JobFlowRole": "EMR_EC2_DefaultRole",
+  "LogUri": "s3://ty-emr/service_logs/",
+  "ReleaseLabel": "emr-5.11.1",
+  "ScaleDownBehavior": "TERMINATE_AT_TASK_COMPLETION",
+  "ServiceRole": "EMR_DefaultRole",
+  "VisibleToAllUsers": true
+}
