@@ -43,5 +43,5 @@ fi
 forever_bin=$(which forever)
 if [ -z $forever_bin ]
 then
-    sudo npm install forever -g
+    npm install forever -g
 fi
