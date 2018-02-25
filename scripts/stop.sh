@@ -39,3 +39,9 @@ then
 
     nvm install 9.5.0
 fi
+
+forever_bin=$(which forever)
+if [ -z $forever_bin ]
+then
+    sudo npm install forever -g
+fi
