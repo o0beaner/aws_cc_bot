@@ -1,3 +1,3 @@
 #!/bin/bash
 
-runuser -l ec2-user -c $stop.sh
+su - ec2-user -c $stop.sh
