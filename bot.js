@@ -1,18 +1,18 @@
 const Discord = require("discord.io");
 const logger = require("winston");
 const fs = require("fs");
-const aws = require('aws-sdk');
-const _ = require('lodash');
-const emr = new aws.EMR({region: 'us-east-1'});
-const kms = new aws.KMS({region: 'us-east-1'});
+const aws = require("aws-sdk");
+const _ = require("lodash");
+const emr = new aws.EMR({region: "us-east-1"});
+const kms = new aws.KMS({region: "us-east-1"});
 
 // Initialize Discord Bot
 
 configureLogging();
 
 function ping(bot, channelID) {
-    send_message(bot, channelID, "Pong!")
-    logger.info('Responding to ping')
+    send_message(bot, channelID, "Pong!");
+    logger.info("Responding to ping");
 }
 
 function send_message(bot, channelID, message_body) {
@@ -23,7 +23,7 @@ function send_message(bot, channelID, message_body) {
 }
 
 function get_template(bot, channelID) {
-    fs.readFile('./templates/base.json', 'utf-8', function(err, json) {
+    fs.readFile("./templates/base.json", "utf-8", function(err, json) {
         launch_cluster(json, bot, channelID);
     });
 }
@@ -31,7 +31,7 @@ function get_template(bot, channelID) {
 function launch_cluster(json, bot, channelID) {
     emr.runJobFlow(JSON.parse(json), function(err, response){
         const cluster_id = response.JobFlowId;
-        const message_body = `Cluster ${cluster_id} has launched! Back in 90 seconds with connection info...`
+        const message_body = `Cluster ${cluster_id} has launched! Back in 90 seconds with connection info...`;
         send_message(bot, channelID, message_body);
         logger.info(message_body);
         setTimeout(function() {
@@ -46,7 +46,7 @@ function list_groups(bot, cluster_id, channelID) {
     };
 
     emr.listInstanceGroups(params, function(err, data){
-        const master_group = _.filter(data.InstanceGroups, { 'Name': 'Master' })[0].Id;
+        const master_group = _.filter(data.InstanceGroups, { "Name": "Master" })[0].Id;
         list_instances(bot, cluster_id, master_group, channelID);
     });
 }
@@ -69,7 +69,7 @@ function print_results(bot, dns_name, cluster_id, channelID) {
 }
 
 function configureLogging() {
-    logger.level = 'info';
+    logger.level = "info";
     logger.remove(logger.transports.Console);
     logger.add(logger.transports.Console, {
         colorize: true,
@@ -80,18 +80,17 @@ function configureLogging() {
 }
 
 function decryptEnvVars() {
-    const secretPath = 'encEnvVars.json';
+    const secretPath = "encEnvVars.json";
     const encryptedSecret = fs.readFileSync(secretPath);
 
     const params = {
         CiphertextBlob: encryptedSecret
-    }
-    let varObj;
+    };
     kms.decrypt(params, function (err, data) {
         if (err) {
             console.log(err, err.stack)
         } else {
-            let varString = data['Plaintext'].toString();
+            let varString = data["Plaintext"].toString();
             let varObj = JSON.parse(varString);
             botInit(varObj);
         }
@@ -101,35 +100,35 @@ function decryptEnvVars() {
 function botInit(varObj) {
 
     const bot = new Discord.Client({
-        token: varObj.prod_authtoken,
+        token: varObj.dev_authtoken,
         autorun: true
     });
 
-    bot.on('ready', function (evt) {
-        logger.info('Connected');
-        logger.info('Logged in as: ');
+    bot.on("ready", function (evt) {
+        logger.info("Connected");
+        logger.info("Logged in as: ");
         logger.info(`${bot.username} - (${bot.id})`);
     });
     botListener(bot);
 }
 
 function botListener(bot) {
-    bot.on('message', function (user, userID, channelID, message, evt) {
+    bot.on("message", function (user, userID, channelID, message, evt) {
         // Our bot needs to know if it will execute a command
         // It will listen for messages that will start with `!`
-        if (message.substring(0, 1) === '!') {
-            const args = message.substring(1).split(' ');
+        if (message.substring(0, 1) === "!") {
+            const args = message.substring(1).split(" ");
             const cmd = args[0];
             switch (cmd) {
-                case 'ping':
+                case "ping":
                     ping(bot, channelID);
                     break;
 
-                case 'launch':
-                    get_template(bot, channelID)
+                case "launch":
+                    get_template(bot, channelID);
                     break;
 
-                case 'fart':
+                case "fart":
                     send_message(bot, channelID, "that other bot is gross");
                     break;
             }
