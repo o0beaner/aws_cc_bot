@@ -1,10 +1,5 @@
 #!/bin/bash
 
-set -x
-
-useracct=$(whoami)
-echo "Running stop as $useracct"
-
 ### check for pids for our applications; first forever, then the application itself
 forever_pid=$(ps aux | grep [f]orever | tr -s " " | cut -d " " -f 2)
 if [ ! -z "$forever_pid" ]

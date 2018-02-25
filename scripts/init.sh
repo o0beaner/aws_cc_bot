@@ -1,15 +1,10 @@
 #!/bin/bash
 
-useracct=$(whoami)
-echo "Running init as $useracct"
-### check for executables in path
-
-curl_bin=$(which curl)
-
 ### check for nvm installation
 if [ ! -d ~/.nvm ]
 then
     echo "nvm not found, initializing installation..."
+    curl_bin=$(which curl)
     if [ -z $curl_bin ]
     then
         echo "installing curl..."
