@@ -22,16 +22,8 @@ else
     echo "nvm seems to be installed"
 fi
 
-### check to see if nvm is active
-nvm_check=$(nvm 2> /dev/null)
-if [ "$nvm_check" != 0 ]
-then
-    echo "activating nvm"
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-else
-    echo "nvm is active"
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 ### check for node installation
 if [ -z $node_bin ]
