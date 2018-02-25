@@ -3,10 +3,18 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/node
+permissions:
+  - object: /home/ec2-user
+    owner: ec2-user
+    group: ec2-user
+    type:
+      - directory
+      - file
 hooks:
   BeforeInstall:
     - location: scripts/stop.sh
       timeout: 180
+      runas: ec2-user
   ApplicationStart:
     - location: scripts/npm_update.sh
     - location: scripts/start.sh
