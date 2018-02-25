@@ -25,6 +25,8 @@ echo "Node bin: $node_bin"
 echo $node_bin
 if [ -z $node_bin ]
 then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     nvm_bin=$(which nvm)
     echo "Nvm bin: $nvm_bin"
     if [ -z $nvm_bin ]
