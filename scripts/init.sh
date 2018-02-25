@@ -3,8 +3,7 @@
 useracct=$(whoami)
 echo "Running init as $useracct"
 ### check for executables in path
-node_bin=$(which node)
-forever_bin=$(which forever)
+
 curl_bin=$(which curl)
 
 ### check for nvm installation
@@ -24,6 +23,9 @@ fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+node_bin=$(which node)
+forever_bin=$(which forever)
 
 ### check for node installation
 if [ -z $node_bin ]
