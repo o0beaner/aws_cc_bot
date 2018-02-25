@@ -1,9 +1,7 @@
 #!/bin/bash
 
-set -x
-
-echo $USER
 useracct=$(whoami)
+echo "Running init as $useracct"
 ### check for executables in path
 node_bin=$(which node)
 forever_bin=$(which forever)
@@ -18,7 +16,7 @@ then
         echo "installing curl..."
         sudo yum install -y curl
     fi
-    curl found, installing nvm...
+    echo "curl found, installing nvm..."
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 else
     echo "nvm seems to be installed"
