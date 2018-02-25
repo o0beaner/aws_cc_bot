@@ -19,3 +19,4 @@ hooks:
     - location: scripts/npm_update.sh
     - location: scripts/start.sh
       timeout: 3600
+      runas: ec2-user
