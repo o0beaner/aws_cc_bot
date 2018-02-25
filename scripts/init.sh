@@ -2,6 +2,8 @@
 
 set -x
 
+echo $USER
+useracct=$(whoami)
 ### check for executables in path
 node_bin=$(which node)
 forever_bin=$(which forever)
