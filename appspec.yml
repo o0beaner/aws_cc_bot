@@ -1,4 +1,4 @@
-version: 0.0
+version: 1.0
 os: linux
 files:
   - source: /
@@ -13,10 +13,15 @@ permissions:
 hooks:
   BeforeInstall:
     - location: scripts/stop.sh
-      timeout: 180
+      timeout: 120
+      runas: ec2-user
+    - location: scripts/init.sh
+      timeout: 120
       runas: ec2-user
   ApplicationStart:
     - location: scripts/npm_update.sh
+      timeout: 120
+      runas: ec2-user
     - location: scripts/start.sh
-      timeout: 3600
+      timeout: 120
       runas: ec2-user
