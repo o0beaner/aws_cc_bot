@@ -9,9 +9,7 @@ hooks:
   BeforeInstall:
     - location: scripts/stop.sh
       timeout: 180
-  AfterInstall:
-    - location: scripts/npm_update.sh
-      timeout: 180
   ApplicationStart:
+    - location: scripts/npm_update.sh
     - location: scripts/start.sh
       timeout: 3600
