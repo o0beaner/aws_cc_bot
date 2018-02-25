@@ -12,16 +12,16 @@ permissions:
       - file
 hooks:
   BeforeInstall:
-    - location: scripts/stop.sh
+    - location: scripts/wrapper.sh stop
       timeout: 120
       runas: ec2-user
-    - location: scripts/init.sh
+    - location: scripts/wrapper.sh init
       timeout: 120
       runas: ec2-user
   ApplicationStart:
-    - location: scripts/npm_update.sh
+    - location: scripts/wrapper.sh npm_update
       timeout: 120
       runas: ec2-user
-    - location: scripts/start.sh
+    - location: scripts/wrapper.sh start
       timeout: 120
       runas: ec2-user
