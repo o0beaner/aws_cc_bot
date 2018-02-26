@@ -15,6 +15,15 @@ function ping(bot, channelID) {
     logger.info("Responding to ping");
 }
 
+function khaled(bot, channelID) {
+    fs.readFile("./resources/khaled.txt", "utf-8", function(err, data) {
+        let arr = data.split("\n");
+        let item = arr[Math.floor(Math.random()*arr.length)];
+        let message_body = item;
+        send_message(bot, channelID, message_body);
+    });
+}
+
 function send_message(bot, channelID, message_body) {
     bot.sendMessage({
         to: channelID,
@@ -130,6 +139,10 @@ function botListener(bot) {
 
                 case "fart":
                     send_message(bot, channelID, "that other bot is gross");
+                    break;
+
+                case "khaled":
+                    khaled(bot, channelID);
                     break;
             }
         }
