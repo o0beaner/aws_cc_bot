@@ -141,7 +141,7 @@ function botListener(bot) {
                     send_message(bot, channelID, "that other bot is gross");
                     break;
 
-                case "khaled":
+                case "keystosuccess":
                     khaled(bot, channelID);
                     break;
             }
